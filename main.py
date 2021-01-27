@@ -13,9 +13,9 @@ if __name__ == '__main__':
     spider_biquge = SpiderBiquge()
     choice_function = input('请选择:')
     if choice_function == '1':
-        spider_biquge.saveBookListsToMysql()
+        spider_biquge.getBiqugeUrlThreadPoolExecutor()
     elif choice_function == '2':
-        spider_biquge.getBiqugeUrl()
+        spider_biquge.getBiqugeUrlThreadPoolExecutorByMap()
     else:
         print('没有此功能')
         sys.exit(1)
