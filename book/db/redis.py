@@ -5,16 +5,26 @@ import redis
 
 
 class REDIS:
-    def __init__(self, host, port, password, db):
+    def __init__(self, host, port, password):
         self.host = host
-        self.user = user
+        self.port = port
         self.password = password
-        self.db = db
 
     def GetConnect(self):
-        self.pool = pymssql.ConnectionPool(host=self.host, user=self.user, password=self.pwd, database=self.db, charset='utf8')
-        red = redis.Redis(connection_pool=self.pool)
-        if not red:
+        self.pool = redis.ConnectionPool(host=self.host, port=self.port, decode_responses=True)
+        r = redis.Redis(connection_pool=self.pool)
+        if not r:
             raise (NameError, '连接数据库失败')
         else:
-            return red
+            return r
+
+    def setKey(self,key,value):
+        r = self.GetConnect()
+        r.set(key,str(value))
+        pass
+
+    def getValue(self,key):
+        r = self.GetConnect()
+        value = r.get(key)
+        return value
+        pass

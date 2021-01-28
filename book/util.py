@@ -13,7 +13,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 
 from .config import global_config
-from .jd_logger import logger
+from .logger import logger
 
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",

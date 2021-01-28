@@ -1,34 +1,31 @@
 # coding=utf-8
 # pymssql下载：http://www.lfd.uci.edu/~gohlke/pythonlibs/#pymssql
 
-import pymongo import MongoClient
+from pymongo import MongoClient
 
 
-class MONOG:
-    def __init__(self, host, port,user, pwd, db):
+class MONGO:
+    def __init__(self, host, port, user, password, db):
         self.host = host
         self.port = port
         self.user = user
-        self.pwd = pwd
+        self.password = password
         self.db = db
 
     def GetConnect(self):
-        if not self.db:
-            raise (NameError, '没有设置数据库信息')
-        client = MongoClient(self.host, self.port)
-        db = client.monitoring
-        if not cur:
+        client = MongoClient(self.host, int(self.port))
+        db = client.monitor
+        # if self.user != '':
+        #     db.authenticate(self.user,self.password)
+        if not db:
             raise (NameError, '连接数据库失败')
         else:
-            return cur
+            return db
 
-    def ExecQuery(self, sql):
-        cur = self.GetConnect()
-        cur.execute(sql)
-        resList = cur.fetchall()
-
-        self.conn.close()
-        return resList
+    def save(self, collection,s):
+        db = self.GetConnect()
+        mycollection = db[collection]
+        mycollection.insert_one(s)
 
     def ExecNonQuery(self, sql):
         cur = self.GetConnect()
